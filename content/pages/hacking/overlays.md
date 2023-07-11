@@ -55,7 +55,7 @@ may change unexpectedly on system update. However, for quick hacking/testing
 this is feasible method, and, currently, the only one that allows removal of
 files.
 
-An example on how to do this, together with a handy indempotent "make sure this
+An example on how to do this, together with a handy idempotent "make sure this
 directory is overlaid/writable" helper is available here:
 [https://gist.github.com/Informatic/d7bcdd59eac16ffbffd3a5b5c24b4195](https://gist.github.com/Informatic/d7bcdd59eac16ffbffd3a5b5c24b4195)
 
@@ -80,13 +80,13 @@ unique app name/identifier.
 Additionally `/var/lib/webosbrew/init.d` itself is not guaranteed to exist,
 since it was not created by default on some Root exploits (namely RootMyTV v1).
 
-In order to [indempotently](https://en.wikipedia.org/wiki/Idempotence) ensure
+In order to [idempotently](https://en.wikipedia.org/wiki/Idempotence) ensure
 a startup script symlink exists, this snippet can be used:
 ```sh
 mkdir -p /var/lib/webosbrew && ln -sf /media/developer/apps/usr/palm/applications/your.app.id/our-startup-script.sh /var/lib/webosbrew/init.d/50-yourappid
 ```
 
-In order to remove it indempotently:
+In order to remove it idempotently:
 ```sh
 rm -rf /var/lib/webosbrew/init.d/50-yourappid
 ```
