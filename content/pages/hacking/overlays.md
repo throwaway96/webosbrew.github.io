@@ -2,12 +2,14 @@ Title: Filesystem overlays
 
 **This article assumes your TV is rooted.**
 
-Most of webOS filesystem is read-only. All read-only partitions are stored as
-**signed squashfs images**, and thus can't be "rw remounted" like it is common
-on Android devices.
+Most of the webOS filesystem is read-only. All read-only partitions are stored
+as **signed** squashfs images and thus can't be remounted read-write (`rw`) as
+is common on Android devices. If you modify any of the signed partitions, your
+TV will almost certainly be bricked (unless you have enabled bootloader access
+*beforehand* and are able to undo the damage).
 
-In order to apply system config-level changes on read-only partitions we need
-to apply these in runtime.
+In order to modify system configuration that is stored on read-only partitions,
+we need to apply the changes at runtime.
 
 ## Replacing files/whole directories
 A simple method of replacing/modifying single files is using `mount --bind`,
@@ -21,7 +23,7 @@ echo 'Hello world!' > /tmp/motd
 mount --bind /tmp/motd /etc/motd
 ```
 
-This also works for replacing whole directories, just use:
+This also works for replacing whole directories; just use:
 ```sh
 mount --bind /tmp/my-example-directory /etc/ssl/certs
 ```
